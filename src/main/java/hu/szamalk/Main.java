@@ -3,8 +3,7 @@ package hu.szamalk;
 import hu.szamalk.modell.Haromszog;
 import hu.szamalk.modell.NemSzerkeszthetoException;
 
-import javax.swing.*;
-import javax.xml.transform.Source;
+
 import java.io.*;
 
 
