@@ -18,19 +18,43 @@ public class Main {
     public Main() {
         //hasznalat();
         //egyenloseg();
-        szerializalas();
+        //szerializalas();
         deszereializalas();
     }
 
     private void deszereializalas() {
-        Haromszog h1 = new Haromszog();
-        //másnéven sorosítás
-        try (ObjectInputStream objKi = new ObjectInputStream(new FileInputStream("egyHaromszog.ser"))){
-            objKi.readObject(h1);
+        try (ObjectInputStream objBe = new ObjectInputStream(new FileInputStream("egyHaromszog.ser"))){
+            Haromszog h = (Haromszog) objBe.readObject();
+            System.out.println("A beolvasott háromszög állapota: "+h);
         } catch (IOException e) {
             e.printStackTrace();
-
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+
+        try (ObjectInputStream objBe = new ObjectInputStream(new FileInputStream("kettoHaromszog.ser"))){
+            Haromszog h1 = (Haromszog) objBe.readObject();
+            System.out.println("Az 1. beolvasott háromszög állapota: "+h1);
+            Haromszog h2 = (Haromszog) objBe.readObject();
+            System.out.println("Az 2. beolvasott háromszög állapota: "+h2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try (ObjectInputStream objBe = new ObjectInputStream(new FileInputStream("tombHaromszogek.dat"))){
+            Haromszog[] haromszogek = (Haromszog[]) objBe.readObject();
+            System.out.println("A háromszögek tömb állapota: ");
+            for (Haromszog haromszog : haromszogek) {
+                System.out.println(haromszog);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void szerializalas() {
